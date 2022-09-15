@@ -19,6 +19,7 @@ const PagenationBar = ({ numOfPage, totalPage }) => {
   return (
     <div className="App">
       <main className="container">
+        <button onClick={() => goFirstSection()}>{'first'}</button>
         <button onClick={() => goBeforeSection()}>{'<<'}</button>
         <button onClick={() => goBefore()}>{'<'}</button>
         <ul className="pages" aria-labelledby="pages">
@@ -34,6 +35,7 @@ const PagenationBar = ({ numOfPage, totalPage }) => {
         </ul>
         <button onClick={() => goNext()}>{'>'}</button>
         <button onClick={() => goNextSection()}>{'>>'}</button>
+        <button onClick={() => goLastSection()}>{'last'}</button>
       </main>
     </div>
   )
