@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useMemo } from 'react'
 
 const usePagenation = (showPages, totalPageParam) => {
   const [listRefIndex, setListRefIndex] = useState(0)
@@ -8,23 +8,23 @@ const usePagenation = (showPages, totalPageParam) => {
   const rest = totalPage % showPages
   const maxSection = rest ? section + 1 : section
 
-  let pagelist
-
-  if (currentSection === maxSection && rest) {
-    pagelist = Array.from(
-      { length: rest },
-      (_, idx) => idx + showPages * (currentSection - 1) + 1
-    )
-  } else {
-    if (totalPage === 0) {
-      pagelist = [1]
-    } else {
-      pagelist = Array.from(
-        { length: showPages },
+  const pagelist = useMemo(() => {
+    if (currentSection === maxSection && rest) {
+      return Array.from(
+        { length: rest },
         (_, idx) => idx + showPages * (currentSection - 1) + 1
       )
+    } else {
+      if (totalPage === 0) {
+        return [1]
+      } else {
+        return Array.from(
+          { length: showPages },
+          (_, idx) => idx + showPages * (currentSection - 1) + 1
+        )
+      }
     }
-  }
+  }, [currentSection, maxSection, rest, totalPage])
 
   const hasNextSection = () => {
     return !(currentSection === maxSection)
