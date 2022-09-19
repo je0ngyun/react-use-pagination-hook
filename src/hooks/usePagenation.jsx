@@ -5,7 +5,7 @@ const usePagenation = (showPages, totalPageParam) => {
   const [currentSection, setCurrentSection] = useState(1)
   const [totalPage, setTotalPage] = useState(totalPageParam)
   const section = Math.floor(totalPage / showPages)
-  const rest = totalPage % 5
+  const rest = totalPage % showPages
   const maxSection = rest ? section + 1 : section
 
   let pagelist
