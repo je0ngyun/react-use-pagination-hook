@@ -27,6 +27,7 @@ const PagenationBar = ({ numOfPage, totalPage }) => {
             <li
               onClick={() => setPage(page)}
               className={currentPage === page ? 'selected' : ''}
+              data-testid={currentPage === page ? 'selected' : ''}
               key={page}
             >
               {page}
