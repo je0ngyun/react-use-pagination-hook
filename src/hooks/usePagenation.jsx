@@ -1,30 +1,30 @@
 import React, { useState, useMemo } from 'react'
 
-const usePagenation = (showPages, totalPageParam) => {
+const usePagenation = ({ numOfPage, totalPage }) => {
   const [listRefIndex, setListRefIndex] = useState(0)
   const [currentSection, setCurrentSection] = useState(1)
-  const [totalPage, setTotalPage] = useState(totalPageParam)
-  const section = Math.floor(totalPage / showPages)
-  const rest = totalPage % showPages
+  const [currentTotalPage, setCurrentTotalPage] = useState(totalPage)
+  const section = Math.floor(currentTotalPage / numOfPage)
+  const rest = currentTotalPage % numOfPage
   const maxSection = rest ? section + 1 : section
 
   const pagelist = useMemo(() => {
     if (currentSection === maxSection && rest) {
       return Array.from(
         { length: rest },
-        (_, idx) => idx + showPages * (currentSection - 1) + 1
+        (_, idx) => idx + numOfPage * (currentSection - 1) + 1
       )
     } else {
-      if (totalPage === 0) {
+      if (currentTotalPage === 0) {
         return [1]
       } else {
         return Array.from(
-          { length: showPages },
-          (_, idx) => idx + showPages * (currentSection - 1) + 1
+          { length: numOfPage },
+          (_, idx) => idx + numOfPage * (currentSection - 1) + 1
         )
       }
     }
-  }, [currentSection, maxSection, rest, totalPage])
+  }, [currentSection, maxSection, rest, currentTotalPage])
 
   const hasNextSection = () => {
     return !(currentSection === maxSection)
@@ -76,14 +76,14 @@ const usePagenation = (showPages, totalPageParam) => {
     }
     if (!hasBefore() && hasBeforeSection()) {
       goBeforeSection()
-      setListRefIndex(showPages - 1)
+      setListRefIndex(numOfPage - 1)
     } else {
       setListRefIndex((prev) => prev - 1)
     }
   }
 
   const setPage = (pageNum) => {
-    setListRefIndex((pageNum - 1) % 5)
+    setListRefIndex((pageNum - 1) % numOfPage)
   }
 
   return {
@@ -94,7 +94,7 @@ const usePagenation = (showPages, totalPageParam) => {
     goLastSection,
     goNext,
     goBefore,
-    setTotalPage,
+    setTotalPage: setCurrentTotalPage,
     setPage,
     get hasNextSection() {
       return hasNextSection()

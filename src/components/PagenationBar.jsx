@@ -14,7 +14,7 @@ const PagenationBar = ({ numOfPage, totalPage }) => {
     setTotalPage,
     setPage,
     currentPage,
-  } = usePagenation(numOfPage, totalPage)
+  } = usePagenation({ numOfPage, totalPage })
 
   return (
     <div className="App">
