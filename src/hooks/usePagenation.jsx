@@ -44,10 +44,12 @@ const usePagenation = ({ numOfPage, totalPage }) => {
   }
   const goFirstSection = () => {
     setCurrentSection(1)
+    setListRefIndex(0)
   }
 
   const goLastSection = () => {
     setCurrentSection(maxSection)
+    setListRefIndex(0)
   }
 
   const hasNext = () => {
