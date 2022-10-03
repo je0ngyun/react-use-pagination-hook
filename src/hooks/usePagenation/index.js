@@ -29,19 +29,23 @@ const usePagenation = ({ numOfPage, totalPage }) => {
   const hasNextSection = () => {
     return !(currentSection === maxSection)
   }
+
   const hasBeforeSection = () => {
     return !(currentSection === 1)
   }
+
   const goNextSection = () => {
     if (!hasNextSection()) return
     setCurrentSection((prev) => prev + 1)
     setListRefIndex(0)
   }
+
   const goBeforeSection = () => {
     if (!hasBeforeSection()) return
     setCurrentSection((prev) => prev - 1)
     setListRefIndex(0)
   }
+
   const goFirstSection = () => {
     setCurrentSection(1)
     setListRefIndex(0)
@@ -84,6 +88,10 @@ const usePagenation = ({ numOfPage, totalPage }) => {
     }
   }
 
+  const setTotalPage = (totalPage) => {
+    setCurrentTotalPage(totalPage)
+  }
+
   const setPage = (pageNum) => {
     setListRefIndex((pageNum - 1) % numOfPage)
   }
@@ -96,7 +104,7 @@ const usePagenation = ({ numOfPage, totalPage }) => {
     goLastSection,
     goNext,
     goBefore,
-    setTotalPage: setCurrentTotalPage,
+    setTotalPage,
     setPage,
     get hasNextSection() {
       return hasNextSection()
