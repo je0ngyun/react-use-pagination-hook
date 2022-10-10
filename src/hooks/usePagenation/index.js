@@ -47,11 +47,13 @@ const usePagenation = ({ numOfPage, totalPage = 0 }) => {
   }
 
   const goFirstSection = () => {
+    if (!hasBeforeSection()) return
     setCurrentSection(1)
     setListRefIndex(0)
   }
 
   const goLastSection = () => {
+    if (!hasNextSection()) return
     setCurrentSection(maxSection)
     setListRefIndex(0)
   }
