@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 interface Props {
   numOfPage: number
   totalPage?: number
@@ -11,7 +13,7 @@ declare const usePagenation: ({ numOfPage, totalPage }: Props) => {
   goLastSection: () => void
   goNext: () => void
   goBefore: () => void
-  setTotalPage: (tatalPage: number) => void
+  setTotalPage: React.Dispatch<React.SetStateAction<number>>
   setPage: (page: number) => void
   hasNextSection: boolean
   hasBeforeSection: boolean

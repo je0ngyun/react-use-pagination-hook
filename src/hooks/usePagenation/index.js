@@ -90,10 +90,6 @@ const usePagenation = ({ numOfPage, totalPage = 0 }) => {
     }
   }
 
-  const setTotalPage = (totalPage) => {
-    setCurrentTotalPage(totalPage)
-  }
-
   const setPage = (pageNum) => {
     setListRefIndex((pageNum - 1) % numOfPage)
   }
@@ -106,7 +102,7 @@ const usePagenation = ({ numOfPage, totalPage = 0 }) => {
     goLastSection,
     goNext,
     goBefore,
-    setTotalPage,
+    setTotalPage: setCurrentTotalPage,
     setPage,
     get hasNextSection() {
       return hasNextSection()
