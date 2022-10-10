@@ -1,5 +1,5 @@
 <div align="center">
-  <img src='https://user-images.githubusercontent.com/33706043/194744469-9a9d1f21-ee11-4efd-a92f-268cfd9d05bd.png' width="50%" alt='react-use-pagination' />
+  <img src='https://raw.githubusercontent.com/je0ngyun/use-pagenation/docs/7/media/logo.png' width="60%" alt='react-use-pagination-hook' />
 </div>
 
 <div align="center">
@@ -177,3 +177,9 @@ const LandingPage = () => {
 
 export default LandingPage
 ```
+
+## Result
+
+<div>
+  <img src='https://raw.githubusercontent.com/je0ngyun/use-pagenation/docs/7/media/using-react-query.gif' width="40%" alt='react-use-pagination-hook' />
+</div>
