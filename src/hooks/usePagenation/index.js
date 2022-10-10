@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 
-const usePagenation = ({ numOfPage, totalPage }) => {
+const usePagenation = ({ numOfPage, totalPage = 0 }) => {
   const [listRefIndex, setListRefIndex] = useState(0)
   const [currentSection, setCurrentSection] = useState(1)
   const [currentTotalPage, setCurrentTotalPage] = useState(totalPage)

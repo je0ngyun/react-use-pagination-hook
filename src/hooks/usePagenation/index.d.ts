@@ -1,9 +1,9 @@
-interface Params {
+interface Props {
   numOfPage: number
-  totalPage: number
+  totalPage?: number
 }
 
-declare const usePagenation: ({ numOfPage, totalPage }: Params) => {
+declare const usePagenation: ({ numOfPage, totalPage }: Props) => {
   pagelist: number[]
   goNextSection: () => void
   goBeforeSection: () => void
