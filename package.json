@@ -1,19 +1,51 @@
 {
-  "name": "use-pagenation",
-  "version": "0.1.0",
-  "private": true,
+  "name": "react-use-pagenation-hook",
+  "version": "1.0.0",
+  "module": "dist",
   "main": "dist",
+  "types": "dist/index.d.ts",
+  "description": "Lightweight headless UI pagination hook",
+  "author": "jeongyun",
+  "license": "MIT",
+  "keywords": [
+    "pagination",
+    "use-pagination",
+    "paging",
+    "pagenation-hook",
+    "table"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/je0ngyun/use-pagenation-hook.git"
+  },
+  "bugs": {
+    "url": "https://github.com/je0ngyun/use-pagenation-hook/issues"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "transfile": "rm -rf dist && mkdir dist && babel src/hooks/usePagenation -d dist --copy-files"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17 || ^18"
+  },
   "dependencies": {
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "web-vitals": "^2.1.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "transfile": "rm -rf dist && mkdir dist && babel src/hooks/usePagenation -d dist --copy-files"
+  "devDependencies": {
+    "react-scripts": "5.0.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.3",
+    "@babel/preset-react": "^7.18.6"
   },
   "eslintConfig": {
     "extends": [
@@ -32,15 +64,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "react-scripts": "5.0.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@babel/cli": "^7.19.3",
-    "@babel/core": "^7.19.3",
-    "@babel/preset-env": "^7.19.3",
-    "@babel/preset-react": "^7.18.6"
   }
 }
