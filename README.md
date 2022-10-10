@@ -1,70 +1,179 @@
-# Getting Started with Create React App
+<div align="center">
+  <img src='https://user-images.githubusercontent.com/33706043/194744469-9a9d1f21-ee11-4efd-a92f-268cfd9d05bd.png' width="50%" alt='react-use-pagination' />
+</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+  <em>
+    Lightweight headless UI pagination hook
+  </em>
+</div>
 
-## Available Scripts
+# Install
 
-In the project directory, you can run:
+```
+$ npm install --save react-use-pagination-hook
 
-### `npm start`
+or
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+$ yarn add react-use-pagination-hook
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Features
 
-### `npm test`
+- ⚙️ Completely unstyled, You only need to provide UI controls.
+- ✅ Only State hooks & callbacks, compatible with other libraries.
+- ✨ Provides several different methods for page navigation, such as section-by-section navigation.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Usage
 
-### `npm run build`
+```ts
+const App = () => {
+  const {
+    pagelist,
+    goNextSection,
+    goBeforeSection,
+    goFirstSection,
+    goLastSection,
+    goNext,
+    goBefore,
+    setTotalPage,
+    setPage,
+    currentPage,
+  } = usePagenation({ numOfPage: 5, totalPage: 15 })
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  return (
+    <div className="App">
+      <main className="container">
+        <button onClick={() => goFirstSection()}>{'First'}</button>
+        <button onClick={() => goBeforeSection()}>{'<<'}</button>
+        <button onClick={() => goBefore()}>{'<'}</button>
+        <ul className="pages">
+          {pagelist.map((page) => (
+            <li
+              onClick={() => setPage(page)}
+              className={currentPage === page ? 'selected' : ''}
+              key={page}
+            >
+              {page}
+            </li>
+          ))}
+        </ul>
+        <button onClick={() => goNext()}>{'>'}</button>
+        <button onClick={() => goNextSection()}>{'>>'}</button>
+        <button onClick={() => goLastSection()}>{'Last'}</button>
+      </main>
+    </div>
+  )
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+export default App
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# API
 
-### `npm run eject`
+## Props
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Option    | Type                         | Description                                                                                                                                                           |
+| --------- | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| numOfPage | number                       | Number of pages to display at once in the pagination bar if it is greater than the total number of pages, the page list is initialized with the total number of pages |
+| totalPage | number?(optional, default:0) | Initial value of total number of pages                                                                                                                                |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Hook return value
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Name             | Type                        | Description                                                                                              |
+| ---------------- | --------------------------- | -------------------------------------------------------------------------------------------------------- |
+| pagelist         | number[]                    | An array representing the list of current, returns [1] by default even if the array is empty pages       |
+| currentPage      | number                      | This is the currently selected page, with an initial value of 1                                          |
+| setTotalPage     | (tatalPage: number) => void | Set the total number of pages, used when initializing the number of pages in response to the server side |
+| setPage          | (page: number) => void      | Change the currently selected page number in the pagelist                                                |
+| goBefore         | () => void                  | Go to the before page (currentPage becomes -1)                                                           |
+| goNext           | () => void                  | Go to the next page (currentPage becomes +1)                                                             |
+| goBeforeSection  | () => void                  | Go to the before section, the page list becomes changes                                                  |
+| goNextSection    | () => void                  | Go to the next section, the page list becomes changes                                                    |
+| goFirstSection   | () => void                  | Go to the first section, the page list becomes changes                                                   |
+| goLastSection    | () => void                  | Go to the last section, the page list becomes changes                                                    |
+| hasNextSection   | boolean                     | Returns whether the next section exists                                                                  |
+| hasBeforeSection | boolean                     | Returns whether the before section exists                                                                |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# With React-Query
 
-## Learn More
+```ts
+const numOfPage = 5
+const limit = 10
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+interface FetchPages {
+  (page: number): Promise<{ results: { name: string }[]; count: number }>
+}
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+const fetchPages: FetchPages = async (page: number) => {
+  try {
+    const res = await fetch(`https://swapi.dev/api/people/?page=${page}`)
+    if (!res.ok) throw new Error('Error')
+    return res.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
 
-### Code Splitting
+const LandingPage = () => {
+  const {
+    pagelist,
+    goNextSection,
+    goBeforeSection,
+    goFirstSection,
+    goLastSection,
+    goNext,
+    goBefore,
+    setTotalPage,
+    setPage,
+    currentPage,
+  } = usePagenation({ numOfPage })
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  const { data } = useQuery(
+    ['pagination', currentPage],
+    () => fetchPages(currentPage),
+    {
+      onSuccess: (data) => {
+        // Reinitialize the total page state using the server-side response result
+        // The API used in the example was calculated because it returns the total number of items.
+        setTotalPage(
+          data.count % limit ? data.count / limit + 1 : data.count / limit
+        )
+        // setTotalPage(data.totalPage)
+      },
+    }
+  )
 
-### Analyzing the Bundle Size
+  return (
+    <>
+      <ul className="items">
+        {!data && <li>loading...</li>}
+        {data?.results.map(({ name }, idx) => (
+          <li key={idx}>{name}</li>
+        ))}
+      </ul>
+      <main className="container">
+        <button onClick={() => goFirstSection()}>{'First'}</button>
+        <button onClick={() => goBeforeSection()}>{'<<'}</button>
+        <button onClick={() => goBefore()}>{'<'}</button>
+        <ul className="pages" aria-labelledby="pages">
+          {pagelist.map((page) => (
+            <li
+              onClick={() => setPage(page)}
+              className={currentPage === page ? 'selected' : ''}
+              key={page}
+            >
+              {page}
+            </li>
+          ))}
+        </ul>
+        <button onClick={() => goNext()}>{'>'}</button>
+        <button onClick={() => goNextSection()}>{'>>'}</button>
+        <button onClick={() => goLastSection()}>{'Last'}</button>
+      </main>
+    </>
+  )
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+export default LandingPage
+```
