@@ -1,14 +1,14 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import PagenationBar from './components/PagenationBar'
+import PaginationBar from './components/PaginationBar'
 
 const renderTestComponent = (props) => {
-  const { rerender: rerenderFunc } = render(<PagenationBar {...props} />)
+  const { rerender: rerenderFunc } = render(<PaginationBar {...props} />)
   const goLastButton = screen.getByRole('button', { name: /last/i })
   const nextSectionButton = screen.getByRole('button', { name: /\>\>/i })
   const goNextPageButton = screen.getByRole('button', { name: /^\>$/i })
 
   const rerender = (props) => {
-    rerenderFunc(<PagenationBar {...props} />)
+    rerenderFunc(<PaginationBar {...props} />)
   }
 
   return {
@@ -28,7 +28,7 @@ const renderTestComponent = (props) => {
   }
 }
 
-describe('<PagenationBar />', () => {
+describe('<PaginationBar />', () => {
   it('Hook의 numOfPage 파라미터에 따라 페이지 리스트가 올바르게 표시되어야 한다.', () => {
     const helper = renderTestComponent({
       numOfPage: 5,

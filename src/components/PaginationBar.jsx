@@ -1,8 +1,8 @@
 import React from 'react'
-import usePagenation from '../hooks/usePagenation'
+import usePagination from '../hooks/usePagination'
 import PropTypes from 'prop-types'
 
-const PagenationBar = ({ numOfPage, totalPage }) => {
+const PaginationBar = ({ numOfPage, totalPage }) => {
   const {
     pagelist,
     goNextSection,
@@ -14,7 +14,7 @@ const PagenationBar = ({ numOfPage, totalPage }) => {
     setTotalPage,
     setPage,
     currentPage,
-  } = usePagenation({ numOfPage, totalPage })
+  } = usePagination({ numOfPage, totalPage })
 
   return (
     <div className="App">
@@ -42,9 +42,9 @@ const PagenationBar = ({ numOfPage, totalPage }) => {
   )
 }
 
-PagenationBar.propsTypes = {
+PaginationBar.propsTypes = {
   numOfPage: PropTypes.number,
   totalPage: PropTypes.number,
 }
 
-export default PagenationBar
+export default PaginationBar

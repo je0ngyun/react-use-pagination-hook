@@ -5,7 +5,7 @@ interface Props {
   totalPage?: number
 }
 
-declare const usePagenation: ({ numOfPage, totalPage }: Props) => {
+declare const usePagination: ({ numOfPage, totalPage }: Props) => {
   pagelist: number[]
   goNextSection: () => void
   goBeforeSection: () => void
@@ -20,4 +20,4 @@ declare const usePagenation: ({ numOfPage, totalPage }: Props) => {
   currentPage: number
 }
 
-export default usePagenation
+export default usePagination

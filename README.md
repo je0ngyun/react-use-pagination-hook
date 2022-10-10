@@ -1,5 +1,5 @@
 <div align="center">
-  <img src='https://raw.githubusercontent.com/je0ngyun/use-pagenation/docs/7/media/logo.png' width="60%" alt='react-use-pagination-hook' />
+  <img src='https://raw.githubusercontent.com/je0ngyun/react-use-pagination-hook/master/media/logo.png' width="60%" alt='react-use-pagination-hook' />
 </div>
 
 <div align="center">
@@ -39,7 +39,7 @@ const App = () => {
     setTotalPage,
     setPage,
     currentPage,
-  } = usePagenation({ numOfPage: 5, totalPage: 15 })
+  } = usePagination({ numOfPage: 5, totalPage: 15 })
 
   return (
     <div className="App">
@@ -127,7 +127,7 @@ const LandingPage = () => {
     setTotalPage,
     setPage,
     currentPage,
-  } = usePagenation({ numOfPage })
+  } = usePagination({ numOfPage })
 
   const { data } = useQuery(
     ['pagination', currentPage],
@@ -181,5 +181,5 @@ export default LandingPage
 ## Result
 
 <div>
-  <img src='https://raw.githubusercontent.com/je0ngyun/use-pagenation/docs/7/media/using-react-query.gif' width="40%" alt='react-use-pagination-hook' />
+  <img src='https://raw.githubusercontent.com/je0ngyun/react-use-pagination-hook/master/media/using-react-query.gif' width="40%" alt='react-use-pagination-hook' />
 </div>

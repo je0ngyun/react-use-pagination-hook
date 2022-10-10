@@ -1,0 +1,10 @@
+/media
+/node_modules
+/public
+/src
+.babelrc
+.eslintrc.js
+.gitignore
+.prettierrc.js
+yarn-error.log
+yarn.lock

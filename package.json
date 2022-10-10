@@ -1,5 +1,5 @@
 {
-  "name": "react-use-pagenation-hook",
+  "name": "react-use-pagination-hook",
   "version": "1.0.0",
   "module": "dist",
   "main": "dist",
@@ -11,22 +11,22 @@
     "pagination",
     "use-pagination",
     "paging",
-    "pagenation-hook",
+    "pagination-hook",
     "table"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/je0ngyun/use-pagenation-hook.git"
+    "url": "https://github.com/je0ngyun/react-use-pagination-hook.git"
   },
   "bugs": {
-    "url": "https://github.com/je0ngyun/use-pagenation-hook/issues"
+    "url": "https://github.com/je0ngyun/react-use-pagination-hook/issues"
   },
   "sideEffects": false,
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "transfile": "rm -rf dist && mkdir dist && babel src/hooks/usePagenation -d dist --copy-files"
+    "transfile": "rm -rf dist && mkdir dist && babel src/hooks/usePagination -d dist --copy-files"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17 || ^18"
