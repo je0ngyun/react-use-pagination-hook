@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 
 const usePagination = ({ numOfPage, totalPage = 0 }) => {
   const [listRefIndex, setListRefIndex] = useState(0)
@@ -7,6 +7,10 @@ const usePagination = ({ numOfPage, totalPage = 0 }) => {
   const section = Math.floor(currentTotalPage / numOfPage)
   const rest = currentTotalPage % numOfPage
   const maxSection = rest ? section + 1 : section
+
+  useEffect(() => {
+    setCurrentTotalPage(totalPage)
+  }, [totalPage])
 
   const pagelist = useMemo(() => {
     if (currentSection === maxSection && rest) {
