@@ -2,13 +2,15 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import PaginationBar from './components/PaginationBar'
 
 const renderTestComponent = (props) => {
-  const { rerender: rerenderFunc } = render(<PaginationBar {...props} />)
+  const { rerender: rerenderFunc } = render(
+    <PaginationBar {...props} onChange={jest.fn} />
+  )
   const goLastButton = screen.getByRole('button', { name: /last/i })
   const nextSectionButton = screen.getByRole('button', { name: /\>\>/i })
   const goNextPageButton = screen.getByRole('button', { name: /^\>$/i })
 
   const rerender = (props) => {
-    rerenderFunc(<PaginationBar {...props} />)
+    rerenderFunc(<PaginationBar {...props} onChange={jest.fn} />)
   }
 
   return {
