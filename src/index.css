@@ -125,9 +125,28 @@ table {
 
 .App {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.input {
+  width: 300px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.input input {
+  height: 20px;
+  width: 70px;
+  border: 1px solid #cfcfcf;
+}
+
+.input label {
+  width: 100px;
 }
 
 .container {
@@ -141,6 +160,7 @@ table {
 
 .container button {
   min-width: 30px;
+  height: 30px;
   border: 1px solid #cfcfcf;
   border-radius: 3px;
   transition: all 0.4s;
@@ -169,4 +189,9 @@ table {
 .pages .selected {
   background-color: #2cb5fe;
   color: white;
+}
+
+img {
+  width: 400px;
+  margin-bottom: 30px;
 }
