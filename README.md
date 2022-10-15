@@ -8,6 +8,21 @@
   </em>
 </div>
 
+<br/>
+
+<p align="center">
+  <a href="https://github.com/je0ngyun/react-use-pagination-hook/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-ff69b4.svg" alt="MIT License">
+  </a>
+  <a href="https://www.npmjs.com/package/react-use-pagination-hook">
+    <img src="https://img.shields.io/npm/v/react-use-pagination-hook.svg">
+  </a>
+  <img src="https://img.shields.io/badge/coverage-[]-brightgreen.svg" alt="100% coverage">
+  <a href="https://bundlephobia.com/package/react-use-pagination-hook@latest">
+    <img src="https://badgen.net/bundlephobia/minzip/react-use-pagination-hook@latest">
+  </a>
+</p>
+
 # Install
 
 ```
