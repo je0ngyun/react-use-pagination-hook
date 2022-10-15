@@ -42,6 +42,9 @@ var usePagination = function usePagination(_ref) {
   var section = Math.floor(currentTotalPage / numOfPage);
   var rest = currentTotalPage % numOfPage;
   var maxSection = rest ? section + 1 : section;
+  (0, _react.useEffect)(function () {
+    setCurrentTotalPage(totalPage);
+  }, [totalPage]);
   var pagelist = (0, _react.useMemo)(function () {
     if (currentSection === maxSection && rest) {
       return Array.from({
@@ -137,6 +140,10 @@ var usePagination = function usePagination(_ref) {
   };
 
   var setPage = function setPage(pageNum) {
+    if (pageNum < pagelist[0] || pageNum > pagelist[pagelist.length - 1]) {
+      throw new Error("You cannot set a page to a value that is not in the pagelist");
+    }
+
     setListRefIndex((pageNum - 1) % numOfPage);
   };
 
