@@ -95,6 +95,11 @@ const usePagination = ({ numOfPage, totalPage = 0 }) => {
   }
 
   const setPage = (pageNum) => {
+    if (pageNum < pagelist[0] || pageNum > pagelist[pagelist.length - 1]) {
+      throw new Error(
+        `You cannot set a page to a value that is not in the pagelist`
+      )
+    }
     setListRefIndex((pageNum - 1) % numOfPage)
   }
 
