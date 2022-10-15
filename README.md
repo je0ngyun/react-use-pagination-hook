@@ -178,8 +178,17 @@ const LandingPage = () => {
 export default LandingPage
 ```
 
-## Result
+### Result
 
 <div>
-  <img src='https://raw.githubusercontent.com/je0ngyun/react-use-pagination-hook/master/media/using-react-query.gif' width="40%" alt='react-use-pagination-hook' />
+  <img src='https://raw.githubusercontent.com/je0ngyun/react-use-pagination-hook/master/media/using-react-query.gif' width="60%" alt='react-use-pagination-hook' />
 </div>
+
+# License
+
+Copyright © 2022 [jeongyun <jeongyunniim@gmail.com>](https://github.com/je0ngyun).
+This project is [MIT](https://github.com/je0ngyun/react-use-pagination-hook/blob/master/LICENSE) licensed.
+
+# Bug reporting
+
+Please use [issue](https://github.com/je0ngyun/react-use-pagination-hook/issues) to report bugs
