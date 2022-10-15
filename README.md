@@ -84,20 +84,20 @@ export default App
 
 ## Hook return value
 
-| Name             | Type                        | Description                                                                                              |
-| ---------------- | --------------------------- | -------------------------------------------------------------------------------------------------------- |
-| pagelist         | number[]                    | An array representing the list of current, returns [1] by default even if the array is empty pages       |
-| currentPage      | number                      | This is the currently selected page, with an initial value of 1                                          |
-| setTotalPage     | (tatalPage: number) => void | Set the total number of pages, used when initializing the number of pages in response to the server side |
-| setPage          | (page: number) => void      | Change the currently selected page number in the pagelist                                                |
-| goBefore         | () => void                  | Go to the before page (currentPage becomes -1)                                                           |
-| goNext           | () => void                  | Go to the next page (currentPage becomes +1)                                                             |
-| goBeforeSection  | () => void                  | Go to the before section, the page list becomes changes                                                  |
-| goNextSection    | () => void                  | Go to the next section, the page list becomes changes                                                    |
-| goFirstSection   | () => void                  | Go to the first section, the page list becomes changes                                                   |
-| goLastSection    | () => void                  | Go to the last section, the page list becomes changes                                                    |
-| hasNextSection   | boolean                     | Returns whether the next section exists                                                                  |
-| hasBeforeSection | boolean                     | Returns whether the before section exists                                                                |
+| Name             | Type                        | Description                                                                                                                                  |
+| ---------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| pagelist         | number[]                    | An array representing the list of current, returns [1] by default even if the array is empty pages                                           |
+| currentPage      | number                      | This is the currently selected page, with an initial value of 1                                                                              |
+| setTotalPage     | (tatalPage: number) => void | Set the total number of pages, used when initializing the number of pages in response to the server side                                     |
+| setPage          | (page: number) => void      | Change the currently selected page number in the pagelist, if you try to set a value that is not in the page list array, an error is thrown. |
+| goBefore         | () => void                  | Go to the before page (currentPage becomes -1)                                                                                               |
+| goNext           | () => void                  | Go to the next page (currentPage becomes +1)                                                                                                 |
+| goBeforeSection  | () => void                  | Go to the before section, the page list becomes changes                                                                                      |
+| goNextSection    | () => void                  | Go to the next section, the page list becomes changes                                                                                        |
+| goFirstSection   | () => void                  | Go to the first section, the page list becomes changes                                                                                       |
+| goLastSection    | () => void                  | Go to the last section, the page list becomes changes                                                                                        |
+| hasNextSection   | boolean                     | Returns whether the next section exists                                                                                                      |
+| hasBeforeSection | boolean                     | Returns whether the before section exists                                                                                                    |
 
 # With React-Query
 
