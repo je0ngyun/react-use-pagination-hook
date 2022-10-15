@@ -2,6 +2,7 @@
 /node_modules
 /public
 /src
+/build
 .babelrc
 .eslintrc.js
 .gitignore
