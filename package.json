@@ -14,6 +14,7 @@
     "pagination-hook",
     "table"
   ],
+  "homepage": "https://je0ngyun.github.io/react-use-pagination-hook",
   "repository": {
     "type": "git",
     "url": "https://github.com/je0ngyun/react-use-pagination-hook.git"
@@ -26,7 +27,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "transfile": "rm -rf dist && mkdir dist && babel src/hooks/usePagination -d dist --copy-files"
+    "transfile": "rm -rf dist && mkdir dist && babel src/hooks/usePagination -d dist --copy-files",
+    "deploy": "gh-pages -d build"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17 || ^18"
@@ -38,14 +40,15 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "react-scripts": "5.0.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.19.3",
     "@babel/preset-env": "^7.19.3",
-    "@babel/preset-react": "^7.18.6"
+    "@babel/preset-react": "^7.18.6",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "gh-pages": "^4.0.0",
+    "react-scripts": "5.0.1"
   },
   "eslintConfig": {
     "extends": [
