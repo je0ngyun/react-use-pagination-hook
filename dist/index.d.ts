@@ -1,5 +1,7 @@
 import * as React from 'react'
-
+/**
+ * v1.0.2
+ */
 interface Props {
   /**
    * Number of pages to display at once in the pagination bar if it is greater than the total number of pages, the page list is initialized with the total number of pages
