@@ -27,6 +27,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:coverage": "CI=true npm test -- --env=jsdom --coverage",
     "transfile": "rm -rf dist && mkdir dist && babel src/hooks/usePagination -d dist --copy-files",
     "deploy": "gh-pages -d build"
   },
@@ -34,7 +35,6 @@
     "react": "^16.8.0 || ^17 || ^18"
   },
   "dependencies": {
-    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "web-vitals": "^2.1.4"
@@ -49,6 +49,15 @@
     "@testing-library/user-event": "^13.5.0",
     "gh-pages": "^4.0.0",
     "react-scripts": "5.0.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/hooks/**/*.{js,jsx}",
+      "src/components/*.{js,jsx}"
+    ],
+    "coverageReporters": [
+      "text"
+    ]
   },
   "eslintConfig": {
     "extends": [

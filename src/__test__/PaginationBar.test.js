@@ -1,5 +1,9 @@
+/**
+ * Behavior Test
+ */
+
 import { render, screen, fireEvent } from '@testing-library/react'
-import PaginationBar from './components/PaginationBar'
+import PaginationBar from '../components/PaginationBar'
 
 const renderTestComponent = (props) => {
   const { rerender: rerenderFunc } = render(
@@ -83,5 +87,14 @@ describe('<PaginationBar />', () => {
       expect(helper.selectedPageNum).toBe(i)
       fireEvent.click(helper.goNextPageButton)
     }
+  })
+  it('rerender시 totalPage props가 변경했을 경우 그에따라 hook이 바뀐 상태를 가지는지 테스트', () => {
+    const helper = renderTestComponent({
+      numOfPage: 5,
+      totalPage: 15,
+    })
+    expect(helper.pageListValueArray).toStrictEqual([1, 2, 3, 4, 5])
+    helper.rerender({ numOfPage: 5, totalPage: 1 })
+    expect(helper.pageListValueArray).toStrictEqual([1])
   })
 })
