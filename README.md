@@ -17,10 +17,11 @@
   <a href="https://www.npmjs.com/package/react-use-pagination-hook">
     <img src="https://img.shields.io/npm/v/react-use-pagination-hook.svg">
   </a>
-  <!-- <img src="https://img.shields.io/badge/coverage-[]-brightgreen.svg" alt="100% coverage"> -->
+  <img src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" alt="100% coverage">
   <a href="https://bundlephobia.com/package/react-use-pagination-hook@latest">
     <img src="https://badgen.net/bundlephobia/minzip/react-use-pagination-hook@latest">
   </a>
+  <img src="https://img.shields.io/badge/PRs-welcome-blueviolet.svg" alt="100% coverage">
 </p>
 
 # Install
