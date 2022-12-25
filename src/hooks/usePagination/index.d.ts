@@ -12,7 +12,7 @@ interface Props {
   totalPage?: number
 }
 
-declare const usePagination: ({ numOfPage, totalPage }: Props) => {
+export interface usePaginationReturn {
   /**
    * Number of pages to display at once in the pagination bar if it is greater than the total number of pages, the page list is initialized with the total number of pages
    */
@@ -63,5 +63,10 @@ declare const usePagination: ({ numOfPage, totalPage }: Props) => {
    */
   currentPage: number
 }
+
+declare const usePagination: ({
+  numOfPage,
+  totalPage,
+}: Props) => usePaginationReturn
 
 export default usePagination
