@@ -12,7 +12,7 @@ const usePagination = ({ numOfPage, totalPage = 0 }) => {
     setCurrentTotalPage(totalPage)
   }, [totalPage])
 
-  const pagelist = useMemo(() => {
+  const pageList = useMemo(() => {
     if (currentSection === maxSection && rest) {
       return Array.from(
         { length: rest },
@@ -63,7 +63,7 @@ const usePagination = ({ numOfPage, totalPage = 0 }) => {
   }
 
   const hasNext = () => {
-    return !(listRefIndex === pagelist.length - 1)
+    return !(listRefIndex === pageList.length - 1)
   }
 
   const hasBefore = () => {
@@ -95,16 +95,16 @@ const usePagination = ({ numOfPage, totalPage = 0 }) => {
   }
 
   const setPage = (pageNum) => {
-    if (pageNum < pagelist[0] || pageNum > pagelist[pagelist.length - 1]) {
+    if (pageNum < pageList[0] || pageNum > pageList[pageList.length - 1]) {
       throw new Error(
-        `You cannot set a page to a value that is not in the pagelist`
+        `You cannot set a page to a value that is not in the pageList`
       )
     }
     setListRefIndex((pageNum - 1) % numOfPage)
   }
 
   return {
-    pagelist,
+    pageList,
     goNextSection,
     goBeforeSection,
     goFirstSection,
@@ -120,7 +120,7 @@ const usePagination = ({ numOfPage, totalPage = 0 }) => {
       return hasBeforeSection()
     },
     get currentPage() {
-      return pagelist[listRefIndex]
+      return pageList[listRefIndex]
     },
   }
 }
