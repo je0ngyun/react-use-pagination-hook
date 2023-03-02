@@ -45,7 +45,7 @@ var usePagination = function usePagination(_ref) {
   (0, _react.useEffect)(function () {
     setCurrentTotalPage(totalPage);
   }, [totalPage]);
-  var pagelist = (0, _react.useMemo)(function () {
+  var pageList = (0, _react.useMemo)(function () {
     if (currentSection === maxSection && rest) {
       return Array.from({
         length: rest
@@ -102,7 +102,7 @@ var usePagination = function usePagination(_ref) {
   };
 
   var hasNext = function hasNext() {
-    return !(listRefIndex === pagelist.length - 1);
+    return !(listRefIndex === pageList.length - 1);
   };
 
   var hasBefore = function hasBefore() {
@@ -140,15 +140,15 @@ var usePagination = function usePagination(_ref) {
   };
 
   var setPage = function setPage(pageNum) {
-    if (pageNum < pagelist[0] || pageNum > pagelist[pagelist.length - 1]) {
-      throw new Error("You cannot set a page to a value that is not in the pagelist");
+    if (pageNum < pageList[0] || pageNum > pageList[pageList.length - 1]) {
+      throw new Error("You cannot set a page to a value that is not in the pageList");
     }
 
     setListRefIndex((pageNum - 1) % numOfPage);
   };
 
   return {
-    pagelist: pagelist,
+    pageList: pageList,
     goNextSection: goNextSection,
     goBeforeSection: goBeforeSection,
     goFirstSection: goFirstSection,
@@ -167,7 +167,7 @@ var usePagination = function usePagination(_ref) {
     },
 
     get currentPage() {
-      return pagelist[listRefIndex];
+      return pageList[listRefIndex];
     }
 
   };
