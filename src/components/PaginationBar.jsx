@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 
 const PaginationBar = ({ numOfPage, totalPage, onChange }) => {
   const {
-    pagelist,
+    pageList,
     goNextSection,
     goBeforeSection,
     goFirstSection,
@@ -27,7 +27,7 @@ const PaginationBar = ({ numOfPage, totalPage, onChange }) => {
       <button onClick={() => goBeforeSection()}>{'<<'}</button>
       <button onClick={() => goBefore()}>{'<'}</button>
       <ul className="pages" aria-labelledby="pages">
-        {pagelist.map((page) => (
+        {pageList.map((page) => (
           <li
             onClick={() => setPage(page)}
             className={currentPage === page ? 'selected' : ''}
