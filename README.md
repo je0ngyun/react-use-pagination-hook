@@ -49,7 +49,7 @@ $ yarn add react-use-pagination-hook
 ```ts
 const App = () => {
   const {
-    pagelist,
+    pageList,
     goNextSection,
     goBeforeSection,
     goFirstSection,
@@ -68,7 +68,7 @@ const App = () => {
         <button onClick={() => goBeforeSection()}>{'<<'}</button>
         <button onClick={() => goBefore()}>{'<'}</button>
         <ul className="pages">
-          {pagelist.map((page) => (
+          {pageList.map((page) => (
             <li
               onClick={() => setPage(page)}
               className={currentPage === page ? 'selected' : ''}
@@ -102,10 +102,10 @@ export default App
 
 | Name             | Type                        | Description                                                                                                                                  |
 | ---------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| pagelist         | number[]                    | An array representing the list of current, returns [1] by default even if the array is empty pages                                           |
+| pageList         | number[]                    | An array representing the list of current, returns [1] by default even if the array is empty pages                                           |
 | currentPage      | number                      | This is the currently selected page, with an initial value of 1                                                                              |
 | setTotalPage     | (tatalPage: number) => void | Set the total number of pages, used when initializing the number of pages in response to the server side                                     |
-| setPage          | (page: number) => void      | Change the currently selected page number in the pagelist, if you try to set a value that is not in the page list array, an error is thrown. |
+| setPage          | (page: number) => void      | Change the currently selected page number in the pageList, if you try to set a value that is not in the page list array, an error is thrown. |
 | goBefore         | () => void                  | Go to the before page (currentPage becomes -1)                                                                                               |
 | goNext           | () => void                  | Go to the next page (currentPage becomes +1)                                                                                                 |
 | goBeforeSection  | () => void                  | Go to the before section, the page list becomes changes                                                                                      |
@@ -137,7 +137,7 @@ const fetchPages: FetchPages = async (page: number) => {
 
 const LandingPage = () => {
   const {
-    pagelist,
+    pageList,
     goNextSection,
     goBeforeSection,
     goFirstSection,
@@ -177,7 +177,7 @@ const LandingPage = () => {
         <button onClick={() => goBeforeSection()}>{'<<'}</button>
         <button onClick={() => goBefore()}>{'<'}</button>
         <ul className="pages" aria-labelledby="pages">
-          {pagelist.map((page) => (
+          {pageList.map((page) => (
             <li
               onClick={() => setPage(page)}
               className={currentPage === page ? 'selected' : ''}
