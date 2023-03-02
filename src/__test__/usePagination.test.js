@@ -22,7 +22,7 @@ const PROPS_WHEN_WITHOUT_TOTALPAGE = {
 describe('usePagination', () => {
   it('커스텀 훅의 상태가 올바르게 초기화 되는지 테스트', () => {
     const { result } = renderHook(() => usePagination(DEFAULT_PROPS))
-    expect(result.current.pagelist).toStrictEqual([1, 2, 3, 4, 5])
+    expect(result.current.pageList).toStrictEqual([1, 2, 3, 4, 5])
     expect(result.current.currentPage).toBe(1)
     expect(result.current.hasBeforeSection).toBe(false)
     expect(result.current.hasNextSection).toBe(true)
@@ -41,33 +41,33 @@ describe('usePagination', () => {
     expect(result.current.currentPage).toBe(1)
   })
 
-  it('goLastSection 호출시의 pagelist, currentPage 상태 테스트', () => {
+  it('goLastSection 호출시의 pageList, currentPage 상태 테스트', () => {
     const { result } = renderHook(() => usePagination(DEFAULT_PROPS))
     act(() => result.current.goLastSection())
-    expect(result.current.pagelist).toStrictEqual([11, 12, 13, 14, 15])
+    expect(result.current.pageList).toStrictEqual([11, 12, 13, 14, 15])
     expect(result.current.currentPage).toBe(11)
   })
 
-  it('goFirstSection 호출시의 pagelist, currentPage 상태 테스트', () => {
+  it('goFirstSection 호출시의 pageList, currentPage 상태 테스트', () => {
     const { result } = renderHook(() => usePagination(DEFAULT_PROPS))
     act(() => result.current.goLastSection())
     act(() => result.current.goFirstSection())
-    expect(result.current.pagelist).toStrictEqual([1, 2, 3, 4, 5])
+    expect(result.current.pageList).toStrictEqual([1, 2, 3, 4, 5])
     expect(result.current.currentPage).toBe(1)
   })
 
-  it('setPage 호출시 현재 pagelist 배열에 존재한다면 currentPage는 setPage에 넘긴 인수로 바뀌어야한다.', () => {
+  it('setPage 호출시 현재 pageList 배열에 존재한다면 currentPage는 setPage에 넘긴 인수로 바뀌어야한다.', () => {
     const { result } = renderHook(() => usePagination(DEFAULT_PROPS))
     act(() => result.current.setPage(3))
     expect(result.current.currentPage).toBe(3)
   })
 
-  it('setPage 호출시 현재 pagelist 배열에 존재하지 않는다면 예외를 던져야 한다.', () => {
+  it('setPage 호출시 현재 pageList 배열에 존재하지 않는다면 예외를 던져야 한다.', () => {
     const { result } = renderHook(() => usePagination(DEFAULT_PROPS))
     expect(() => result.current.setPage(100)).toThrow(Error)
   })
 
-  it('hasNextSection이 false이고 currentPage가 pagelist의 맨 마지막 아이템이라면 goNext 호출 시 변화가 없어야한다.', () => {
+  it('hasNextSection이 false이고 currentPage가 pageList의 맨 마지막 아이템이라면 goNext 호출 시 변화가 없어야한다.', () => {
     const { result } = renderHook(() => usePagination(DEFAULT_PROPS))
     act(() => result.current.goLastSection())
     act(() => result.current.setPage(15))
@@ -76,7 +76,7 @@ describe('usePagination', () => {
     expect(result.current.currentPage).toBe(15)
   })
 
-  it('hasBeforeSection이 false이고 currentPage가 pagelist의 맨 첫번째 아이템이라면 goBefore 호출 시 변화가 없어야한다.', () => {
+  it('hasBeforeSection이 false이고 currentPage가 pageList의 맨 첫번째 아이템이라면 goBefore 호출 시 변화가 없어야한다.', () => {
     const { result } = renderHook(() => usePagination(DEFAULT_PROPS))
     act(() => result.current.goFirstSection())
     act(() => result.current.setPage(1))
@@ -85,7 +85,7 @@ describe('usePagination', () => {
     expect(result.current.currentPage).toBe(1)
   })
 
-  it('hasBeforeSection이 false이고 currentPage가 pagelist의 맨 첫번째 아이템이라면 goBefore 호출 시 변화가 없어야한다.', () => {
+  it('hasBeforeSection이 false이고 currentPage가 pageList의 맨 첫번째 아이템이라면 goBefore 호출 시 변화가 없어야한다.', () => {
     const { result } = renderHook(() => usePagination(DEFAULT_PROPS))
     act(() => result.current.goFirstSection())
     act(() => result.current.setPage(1))
@@ -97,21 +97,21 @@ describe('usePagination', () => {
   it('goNextSection 호출시 pagilist 배열의 아이템들은 이전페이지의 각 아이템 + numOfPage 만큼 커져야한다.', () => {
     const { result } = renderHook(() => usePagination(DEFAULT_PROPS))
     act(() => result.current.goNextSection())
-    expect(result.current.pagelist).toStrictEqual([6, 7, 8, 9, 10])
+    expect(result.current.pageList).toStrictEqual([6, 7, 8, 9, 10])
     act(() => result.current.goNextSection())
-    expect(result.current.pagelist).toStrictEqual([11, 12, 13, 14, 15])
+    expect(result.current.pageList).toStrictEqual([11, 12, 13, 14, 15])
   })
 
-  it('goBeforeSection 호출시 pagilist 배열의 아이템들은 이전페이지의 각 아이템 - numOfPage 만큼 작아져야한다.', () => {
+  it('goBeforeSection 호출시 pageList 배열의 아이템들은 이전페이지의 각 아이템 - numOfPage 만큼 작아져야한다.', () => {
     const { result } = renderHook(() => usePagination(DEFAULT_PROPS))
     act(() => result.current.goLastSection())
     act(() => result.current.goBeforeSection())
-    expect(result.current.pagelist).toStrictEqual([6, 7, 8, 9, 10])
+    expect(result.current.pageList).toStrictEqual([6, 7, 8, 9, 10])
     act(() => result.current.goBeforeSection())
-    expect(result.current.pagelist).toStrictEqual([1, 2, 3, 4, 5])
+    expect(result.current.pageList).toStrictEqual([1, 2, 3, 4, 5])
   })
 
-  it('goNextSection 호출시 currentPage는 바뀐 pagilist 배열의 가장 첫번째 아이템이어야 한다', () => {
+  it('goNextSection 호출시 currentPage는 바뀐 pageList 배열의 가장 첫번째 아이템이어야 한다', () => {
     const { result } = renderHook(() => usePagination(DEFAULT_PROPS))
     act(() => result.current.setPage(3))
     act(() => result.current.goNextSection())
@@ -150,7 +150,7 @@ describe('usePagination', () => {
       usePagination(PROPS_WHEN_REMAINDER_OCCURS)
     )
     act(() => result.current.goLastSection())
-    expect(result.current.pagelist.length).toBe(
+    expect(result.current.pageList.length).toBe(
       PROPS_WHEN_REMAINDER_OCCURS.totalPage %
         PROPS_WHEN_REMAINDER_OCCURS.numOfPage
     )
@@ -162,7 +162,7 @@ describe('usePagination', () => {
       usePagination(PROPS_WHEN_WITHOUT_TOTALPAGE)
     )
     expect(result.current.currentPage).toBe(1)
-    expect(result.current.pagelist).toStrictEqual([1])
+    expect(result.current.pageList).toStrictEqual([1])
   })
 
   // goNext, goBefore 메소드의 section간 자동 이동을 위함
