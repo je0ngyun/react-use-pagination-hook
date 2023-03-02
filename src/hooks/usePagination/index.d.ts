@@ -16,7 +16,7 @@ export interface usePaginationReturn {
   /**
    * Number of pages to display at once in the pagination bar if it is greater than the total number of pages, the page list is initialized with the total number of pages
    */
-  pagelist: number[]
+  pageList: number[]
   /**
    * Go to the next section, the page list becomes changes
    */
@@ -46,7 +46,7 @@ export interface usePaginationReturn {
    */
   setTotalPage: React.Dispatch<React.SetStateAction<number>>
   /**
-   * Change the currently selected page number in the pagelist
+   * Change the currently selected page number in the pageList
    * If you try to set a value that is not in the page list array, an error is thrown.
    */
   setPage: (page: number) => void
