@@ -203,6 +203,75 @@ export default LandingPage
   <img src='https://raw.githubusercontent.com/je0ngyun/react-use-pagination-hook/master/media/using-react-query.gif' width="60%" alt='react-use-pagination-hook' />
 </div>
 
+# With SearchParams
+
+With the addition of the "initialPage" and "onPageChange" features in version 2.1.0, it is now possible to seamlessly integrate them with search parameters.
+
+```ts
+// Example of using the useSearchParams hook from react-router-dom
+
+const usePageParam = () => {
+  const [params, setParams] = useSearchParams()
+
+  const pageParam = params.get('page') || 1
+
+  const setPageParam = (page) => {
+    params.set('page', page)
+    setParams(params)
+  }
+
+  return [pageParam, setPageParam]
+}
+
+const App = () => {
+  const [pageParam, setPageParam] = usePageParam()
+
+  const {
+    pageList,
+    goNextSection,
+    goBeforeSection,
+    goFirstSection,
+    goLastSection,
+    goNext,
+    goBefore,
+    setTotalPage,
+    setPage,
+    currentPage,
+  } = usePagination({
+    numOfPage: 5,
+    totalPage: 15,
+    initialPage: pageParam,
+    onPageChange: (page) => setPageParam(page),
+  })
+
+  return (
+    <div className="App">
+      <main className="container">
+        <button onClick={() => goFirstSection()}>{'First'}</button>
+        <button onClick={() => goBeforeSection()}>{'<<'}</button>
+        <button onClick={() => goBefore()}>{'<'}</button>
+        <ul className="pages">
+          {pageList.map((page) => (
+            <li
+              onClick={() => setPage(page)}
+              className={currentPage === page ? 'selected' : ''}
+              key={page}
+            >
+              {page}
+            </li>
+          ))}
+        </ul>
+        <button onClick={() => goNext()}>{'>'}</button>
+        <button onClick={() => goNextSection()}>{'>>'}</button>
+        <button onClick={() => goLastSection()}>{'Last'}</button>
+      </main>
+    </div>
+  )
+}
+
+export default App
+```
+
 # License
 
 Copyright © 2022 [jeongyun <jeongyunniim@gmail.com>](https://github.com/je0ngyun).
