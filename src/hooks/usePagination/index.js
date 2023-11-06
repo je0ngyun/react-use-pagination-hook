@@ -1,74 +1,72 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 
-const usePagination = ({ numOfPage, totalPage = 0 }) => {
-  const [listRefIndex, setListRefIndex] = useState(0)
-  const [currentSection, setCurrentSection] = useState(1)
+const usePagination = ({
+  numOfPage,
+  totalPage = 0,
+  initialPage = 1,
+  onPageChange,
+}) => {
+  const mountedFlag = useRef(false)
+
+  const initialSection = Math.ceil(initialPage / numOfPage)
+  const initialListRefIndex = initialPage - (initialSection - 1) * numOfPage - 1
+
+  const [currentListRefIndex, setCurrentListRefIndex] =
+    useState(initialListRefIndex)
+  const [currentSection, setCurrentSection] = useState(initialSection)
   const [currentTotalPage, setCurrentTotalPage] = useState(totalPage)
+
   const section = Math.floor(currentTotalPage / numOfPage)
   const rest = currentTotalPage % numOfPage
   const maxSection = rest ? section + 1 : section
-
-  useEffect(() => {
-    setCurrentTotalPage(totalPage)
-  }, [totalPage])
+  const listRefIndex = currentTotalPage ? currentListRefIndex : 0
 
   const pageList = useMemo(() => {
-    if (currentSection === maxSection && rest) {
+    if (currentSection === maxSection && rest)
       return Array.from(
         { length: rest },
         (_, idx) => idx + numOfPage * (currentSection - 1) + 1
       )
-    } else {
-      if (currentTotalPage === 0) {
-        return [1]
-      } else {
-        return Array.from(
-          { length: numOfPage },
-          (_, idx) => idx + numOfPage * (currentSection - 1) + 1
-        )
-      }
-    }
+
+    if (currentTotalPage === 0) return [initialPage]
+
+    return Array.from(
+      { length: numOfPage },
+      (_, idx) => idx + numOfPage * (currentSection - 1) + 1
+    )
   }, [currentSection, maxSection, rest, currentTotalPage])
 
-  const hasNextSection = () => {
-    return !(currentSection === maxSection)
-  }
+  const hasNextSection = () => !(currentSection === maxSection)
 
-  const hasBeforeSection = () => {
-    return !(currentSection === 1)
-  }
+  const hasBeforeSection = () => !(currentSection === 1)
 
   const goNextSection = () => {
     if (!hasNextSection()) return
     setCurrentSection((prev) => prev + 1)
-    setListRefIndex(0)
+    setCurrentListRefIndex(0)
   }
 
   const goBeforeSection = () => {
     if (!hasBeforeSection()) return
     setCurrentSection((prev) => prev - 1)
-    setListRefIndex(0)
+    setCurrentListRefIndex(0)
   }
 
   const goFirstSection = () => {
     if (!hasBeforeSection()) return
     setCurrentSection(1)
-    setListRefIndex(0)
+    setCurrentListRefIndex(0)
   }
 
   const goLastSection = () => {
     if (!hasNextSection()) return
     setCurrentSection(maxSection)
-    setListRefIndex(0)
+    setCurrentListRefIndex(0)
   }
 
-  const hasNext = () => {
-    return !(listRefIndex === pageList.length - 1)
-  }
+  const hasNext = () => !(listRefIndex === pageList.length - 1)
 
-  const hasBefore = () => {
-    return !(listRefIndex === 0)
-  }
+  const hasBefore = () => !(listRefIndex === 0)
 
   const goNext = () => {
     if (!hasNext() && !hasNextSection()) {
@@ -76,9 +74,9 @@ const usePagination = ({ numOfPage, totalPage = 0 }) => {
     }
     if (!hasNext() && hasNextSection()) {
       goNextSection()
-      setListRefIndex(0)
+      setCurrentListRefIndex(0)
     } else {
-      setListRefIndex((prev) => prev + 1)
+      setCurrentListRefIndex((prev) => prev + 1)
     }
   }
 
@@ -88,9 +86,9 @@ const usePagination = ({ numOfPage, totalPage = 0 }) => {
     }
     if (!hasBefore() && hasBeforeSection()) {
       goBeforeSection()
-      setListRefIndex(numOfPage - 1)
+      setCurrentListRefIndex(numOfPage - 1)
     } else {
-      setListRefIndex((prev) => prev - 1)
+      setCurrentListRefIndex((prev) => prev - 1)
     }
   }
 
@@ -100,8 +98,22 @@ const usePagination = ({ numOfPage, totalPage = 0 }) => {
         `You cannot set a page to a value that is not in the pageList`
       )
     }
-    setListRefIndex((pageNum - 1) % numOfPage)
+    setCurrentListRefIndex((pageNum - 1) % numOfPage)
   }
+
+  useEffect(() => {
+    setCurrentTotalPage(totalPage)
+  }, [totalPage])
+
+  useEffect(() => {
+    setCurrentSection(initialSection)
+    setCurrentListRefIndex(initialListRefIndex)
+  }, [initialPage])
+
+  useEffect(() => {
+    if (mountedFlag.current) onPageChange?.(pageList[listRefIndex])
+    mountedFlag.current = true
+  }, [pageList[listRefIndex]])
 
   return {
     pageList,
