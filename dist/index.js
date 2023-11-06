@@ -22,14 +22,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var usePagination = function usePagination(_ref) {
   var numOfPage = _ref.numOfPage,
       _ref$totalPage = _ref.totalPage,
-      totalPage = _ref$totalPage === void 0 ? 0 : _ref$totalPage;
+      totalPage = _ref$totalPage === void 0 ? 0 : _ref$totalPage,
+      _ref$initialPage = _ref.initialPage,
+      initialPage = _ref$initialPage === void 0 ? 1 : _ref$initialPage,
+      onPageChange = _ref.onPageChange;
+  var mountedFlag = (0, _react.useRef)(false);
+  var initialSection = Math.ceil(initialPage / numOfPage);
+  var initialListRefIndex = initialPage - (initialSection - 1) * numOfPage - 1;
 
-  var _useState = (0, _react.useState)(0),
+  var _useState = (0, _react.useState)(initialListRefIndex),
       _useState2 = _slicedToArray(_useState, 2),
-      listRefIndex = _useState2[0],
-      setListRefIndex = _useState2[1];
+      currentListRefIndex = _useState2[0],
+      setCurrentListRefIndex = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(1),
+  var _useState3 = (0, _react.useState)(initialSection),
       _useState4 = _slicedToArray(_useState3, 2),
       currentSection = _useState4[0],
       setCurrentSection = _useState4[1];
@@ -42,27 +48,19 @@ var usePagination = function usePagination(_ref) {
   var section = Math.floor(currentTotalPage / numOfPage);
   var rest = currentTotalPage % numOfPage;
   var maxSection = rest ? section + 1 : section;
-  (0, _react.useEffect)(function () {
-    setCurrentTotalPage(totalPage);
-  }, [totalPage]);
+  var listRefIndex = currentTotalPage ? currentListRefIndex : 0;
   var pageList = (0, _react.useMemo)(function () {
-    if (currentSection === maxSection && rest) {
-      return Array.from({
-        length: rest
-      }, function (_, idx) {
-        return idx + numOfPage * (currentSection - 1) + 1;
-      });
-    } else {
-      if (currentTotalPage === 0) {
-        return [1];
-      } else {
-        return Array.from({
-          length: numOfPage
-        }, function (_, idx) {
-          return idx + numOfPage * (currentSection - 1) + 1;
-        });
-      }
-    }
+    if (currentSection === maxSection && rest) return Array.from({
+      length: rest
+    }, function (_, idx) {
+      return idx + numOfPage * (currentSection - 1) + 1;
+    });
+    if (currentTotalPage === 0) return [initialPage];
+    return Array.from({
+      length: numOfPage
+    }, function (_, idx) {
+      return idx + numOfPage * (currentSection - 1) + 1;
+    });
   }, [currentSection, maxSection, rest, currentTotalPage]);
 
   var hasNextSection = function hasNextSection() {
@@ -78,7 +76,7 @@ var usePagination = function usePagination(_ref) {
     setCurrentSection(function (prev) {
       return prev + 1;
     });
-    setListRefIndex(0);
+    setCurrentListRefIndex(0);
   };
 
   var goBeforeSection = function goBeforeSection() {
@@ -86,19 +84,19 @@ var usePagination = function usePagination(_ref) {
     setCurrentSection(function (prev) {
       return prev - 1;
     });
-    setListRefIndex(0);
+    setCurrentListRefIndex(0);
   };
 
   var goFirstSection = function goFirstSection() {
     if (!hasBeforeSection()) return;
     setCurrentSection(1);
-    setListRefIndex(0);
+    setCurrentListRefIndex(0);
   };
 
   var goLastSection = function goLastSection() {
     if (!hasNextSection()) return;
     setCurrentSection(maxSection);
-    setListRefIndex(0);
+    setCurrentListRefIndex(0);
   };
 
   var hasNext = function hasNext() {
@@ -116,9 +114,9 @@ var usePagination = function usePagination(_ref) {
 
     if (!hasNext() && hasNextSection()) {
       goNextSection();
-      setListRefIndex(0);
+      setCurrentListRefIndex(0);
     } else {
-      setListRefIndex(function (prev) {
+      setCurrentListRefIndex(function (prev) {
         return prev + 1;
       });
     }
@@ -131,9 +129,9 @@ var usePagination = function usePagination(_ref) {
 
     if (!hasBefore() && hasBeforeSection()) {
       goBeforeSection();
-      setListRefIndex(numOfPage - 1);
+      setCurrentListRefIndex(numOfPage - 1);
     } else {
-      setListRefIndex(function (prev) {
+      setCurrentListRefIndex(function (prev) {
         return prev - 1;
       });
     }
@@ -144,9 +142,20 @@ var usePagination = function usePagination(_ref) {
       throw new Error("You cannot set a page to a value that is not in the pageList");
     }
 
-    setListRefIndex((pageNum - 1) % numOfPage);
+    setCurrentListRefIndex((pageNum - 1) % numOfPage);
   };
 
+  (0, _react.useEffect)(function () {
+    setCurrentTotalPage(totalPage);
+  }, [totalPage]);
+  (0, _react.useEffect)(function () {
+    setCurrentSection(initialSection);
+    setCurrentListRefIndex(initialListRefIndex);
+  }, [initialPage]);
+  (0, _react.useEffect)(function () {
+    if (mountedFlag.current) onPageChange === null || onPageChange === void 0 ? void 0 : onPageChange(pageList[listRefIndex]);
+    mountedFlag.current = true;
+  }, [pageList[listRefIndex]]);
   return {
     pageList: pageList,
     goNextSection: goNextSection,

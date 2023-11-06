@@ -1,6 +1,6 @@
 {
   "name": "react-use-pagination-hook",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "module": "dist",
   "main": "dist",
   "types": "dist/index.d.ts",
