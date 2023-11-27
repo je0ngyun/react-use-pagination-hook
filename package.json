@@ -1,38 +1,14 @@
 {
   "name": "react-use-pagination-hook",
-  "version": "2.1.0",
-  "module": "dist",
-  "main": "dist",
-  "types": "dist/index.d.ts",
+  "version": "0.0.0",
   "description": "Lightweight headless UI pagination hook",
   "author": "jeongyun",
-  "license": "MIT",
-  "keywords": [
-    "pagination",
-    "use-pagination",
-    "paging",
-    "pagination-hook",
-    "table"
-  ],
-  "homepage": "https://je0ngyun.github.io/react-use-pagination-hook",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/je0ngyun/react-use-pagination-hook.git"
-  },
-  "bugs": {
-    "url": "https://github.com/je0ngyun/react-use-pagination-hook/issues"
-  },
-  "sideEffects": false,
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:coverage": "CI=true npm test -- --env=jsdom --coverage",
-    "transfile": "rm -rf dist && mkdir dist && babel src/hooks/usePagination -d dist --copy-files",
     "deploy": "gh-pages -d build"
-  },
-  "peerDependencies": {
-    "react": "^16.8.0 || ^17 || ^18"
   },
   "dependencies": {
     "react": "^18.2.0",

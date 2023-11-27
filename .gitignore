@@ -26,5 +26,6 @@ yarn-error.log*
 src/hooks/usePagination/node_modules
 src/hooks/usePagination/README.md
 src/hooks/usePagination/LICENSE
+src/hooks/usePagination/dist
 
 

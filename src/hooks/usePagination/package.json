@@ -1,0 +1,61 @@
+{
+  "name": "react-use-pagination-hook",
+  "version": "2.1.1",
+  "module": "dist",
+  "main": "dist",
+  "types": "dist/index.d.ts",
+  "description": "Lightweight headless UI pagination hook",
+  "author": "jeongyun",
+  "license": "MIT",
+  "keywords": [
+    "pagination",
+    "use-pagination",
+    "paging",
+    "pagination-hook",
+    "table"
+  ],
+  "homepage": "https://je0ngyun.github.io/react-use-pagination-hook",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/je0ngyun/react-use-pagination-hook.git"
+  },
+  "bugs": {
+    "url": "https://github.com/je0ngyun/react-use-pagination-hook/issues"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "copy-docs": "cp ../../../README.md ../../../LICENSE ./",
+    "transfile": "yarn copy-docs && rm -rf dist && mkdir dist && babel index.js index.d.ts -d dist --copy-files"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17 || ^18"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.3",
+    "@babel/preset-react": "^7.18.6"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
