@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# deploy
+src/hooks/usePagination/node_modules
+src/hooks/usePagination/README.md
+src/hooks/usePagination/LICENSE
+
+
